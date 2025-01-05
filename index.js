@@ -113,7 +113,6 @@ const validateBook = (data) => {
     return null;
   };
   
-  // GET semua buku
   app.get("/buku", async (req, res) => {
     try {
       const result = await pool.query("SELECT * FROM buku");
@@ -123,11 +122,9 @@ const validateBook = (data) => {
     }
   });
   
-  // POST buku baru
   app.post("/buku", async (req, res) => {
     const { judul, penulis, penerbit, kategori, stok, harga, sinopsis } = req.body;
   
-    // Validasi data
     const error = validateBook(req.body);
     if (error) {
       return res.status(400).json({ error });
@@ -144,12 +141,10 @@ const validateBook = (data) => {
     }
   });
   
-  // PUT (update) buku
   app.put("/buku/:id", async (req, res) => {
     const { id } = req.params;
     const { judul, penulis, penerbit, kategori, stok, harga, sinopsis } = req.body;
   
-    // Validasi data
     const error = validateBook(req.body);
     if (error) {
       return res.status(400).json({ error });
@@ -171,7 +166,6 @@ const validateBook = (data) => {
     }
   });
   
-  // DELETE buku
   app.delete("/buku/:id", async (req, res) => {
     const { id } = req.params;
   
